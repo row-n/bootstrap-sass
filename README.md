@@ -5,7 +5,7 @@ It's a source of truth for the online team and anyone within the internal networ
 
 ## Installation and Setup
 
-* Clone the repo: `git clone https://github.com/twbs/bootstrap.git`.
+* Clone the repo: `git clone git@gitlab.www.myob.priv:online/styleguide.git`.
 * Install with [npm](https://www.npmjs.com): `npm install`.
 
 ### What's included
