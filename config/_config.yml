@@ -1,0 +1,39 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+title: MYOB online styleguide
+email: rowan.parkinson@myob.com
+description: > # this means to ignore newlines until "baseurl:"
+  MYOB online styleguide. Built with Jekyll, Gulp, Angular and Browser-Sync
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://localhost:2610" # the base hostname & protocol for your site
+encoding:         UTF-8
+
+twitter_username: rowanparkinson
+github_username: row-n
+
+# Where things are
+source:       .
+destination:  ./aem
+layouts_dir:  ./templates
+includes_dir: ./templates/_includes
+
+# Build settings
+markdown:     kramdown
+highlighter:  pygments
+
+# Permalinks
+permalink:    pretty
+
+# Exclude files and folder
+exclude:
+  - node_modules
+  - gulpfile.js
+  - package.json
+  - bower.json
+  - bower_components
