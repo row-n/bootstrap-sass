@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # [MYOB Styleguide](http://cmsdev.myob.com.au/bootstrap/)
 
 MYOB styleguide is a front-end environment to create, optimise and test all features which help to build the MYOB website.
@@ -30,3 +31,7 @@ styleguide/
 ## Documentation
 
 MYOB's styleguide is built with [Jekyll](http://jekyllrb.com), [Bootstrap-SASS](https://github.com/twbs/bootstrap-sass), [Gulp](http://gulpjs.com), [Angular](https://angularjs.org/) and [Browsersync](https://www.browsersync.io).
+=======
+# bootstrap-sass
+Basic install built with Jekyll, Gulp, Sass and Browser-Sync
+>>>>>>> 9ab8abf629bad36da8fadfc2fbcaf6a2d3878eac
