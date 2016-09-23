@@ -19,7 +19,7 @@ github_username: row-n
 
 # Where things are
 source:       .
-destination:  ./aem
+destination:  ./dist
 layouts_dir:  ./templates
 includes_dir: ./templates/_includes
 
