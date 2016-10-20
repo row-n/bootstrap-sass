@@ -1,11 +1,12 @@
 var gulp        = require('gulp');
 var prefix      = require('gulp-autoprefixer');
 var cssnano     = require('gulp-cssnano');
+var combineMq   = require('gulp-combine-mq');
 var concat      = require('gulp-concat');
 var minifyCSS   = require('gulp-minify-css');
 var rename      = require('gulp-rename');
 var sass        = require('gulp-sass');
-var sassLint    = require('gulp-sass-lint');
+var scsslint    = require('gulp-scss-lint');
 var uglify      = require('gulp-uglify');
 var browserSync = require('browser-sync');
 var cp          = require('child_process');
@@ -14,6 +15,11 @@ var runSequence = require('run-sequence');
 gulp.task('fonts', function() {
   return gulp.src(['./frontend/_fonts/**/*'])
   .pipe(gulp.dest('./dist/assets/fonts/'));
+});
+
+gulp.task('icons', function() {
+  return gulp.src(['./frontend/_icons/**/*'])
+    .pipe(gulp.dest('./dist/assets/icons/'));
 });
 
 gulp.task('javascript:bootstrap', function () {
@@ -51,20 +57,24 @@ gulp.task('scripts', [
 
 gulp.task('sass', function () {
   return gulp.src(['./frontend/_sass/**/*.scss'])
-  .pipe(sass({
-    includePaths: ['scss'],
-    onError: browserSync.notify
-  }))
-  .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
-  .pipe(browserSync.reload({stream:true}))
-  .pipe(gulp.dest('./dist/css'));
+    .pipe(sass({
+      includePaths: ['scss'],
+      onError: browserSync.notify
+    }))
+    .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
+    .pipe(browserSync.reload({stream:true}))
+    .pipe(gulp.dest('./dist/css'))
+    .pipe(combineMq({
+        beautify: false
+    }))
+    .pipe(minifyCSS())
+    .pipe(rename('styles.min.css'))
+    .pipe(gulp.dest('./dist/css'));
 });
 
-gulp.task('sass-lint', function () {
-  return gulp.src(['./frontend/_sass/**/*.s+(a|c)ss'])
-    .pipe(sassLint())
-    .pipe(sassLint.format())
-    .pipe(sassLint.failOnError())
+gulp.task('scss-lint', function() {
+  return gulp.src('frontend/_sass/**/*.scss')
+    .pipe(scsslint());
 });
 
 gulp.task('jekyll', function (done) {
@@ -83,6 +93,8 @@ gulp.task('browser-sync', function() {
   });
 });
 
+gulp.task('styles', ['scss-lint', 'sass']);
+
 gulp.task('watch', function () {
   gulp.watch(['./frontend/_global/**/*.scss', './frontend/_sass/**/*.scss'], ['sass']);
   gulp.watch(['./frontend/_js/**/*.js'], ['scripts']);
@@ -94,8 +106,7 @@ gulp.task('default', function(done) {
     'jekyll',
     // 'fonts',
     // 'icons',
-    'sass',
-    // 'sass-lint',
+    'styles',
     'scripts',
     'browser-sync',
     'watch',
